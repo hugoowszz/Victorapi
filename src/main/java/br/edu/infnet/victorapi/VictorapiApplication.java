@@ -15,7 +15,7 @@ public class VictorapiApplication {
         boolean continuar = true;
         do {
             System.out.println("----------\n1 - Cadastrar serviço \n0 - Sair\n----------");
-            System.out.print("Escolha uma opção: ");
+            System.out.print("Escolha uma das opções: ");
             int opcao = Integer.parseInt(in.nextLine());
             switch (opcao) {
                 case 1:
