@@ -27,7 +27,7 @@ public class VictorapiApplication {
 
                     System.out.println("Digite o nome do cliente: ");
                     s1.cliente = in.nextLine();
-                    for(int i = 0; i < s1.cliente.length(); i++) {
+                    for(int i = 0; i < s1.cliente.length(); i++) { // Validação para que o nome não contenha números
                         if (!Character.isLetter(s1.cliente.charAt(i))) {
                             System.err.println("O nome só pode conter letras!");
                             System.exit(0);
@@ -44,7 +44,7 @@ public class VictorapiApplication {
 
                     System.out.println("Digite o modelo do carro: ");
                     s1.modelo = in.nextLine();
-                    for(int i = 0; i < s1.modelo.length(); i++) {
+                    for(int i = 0; i < s1.modelo.length(); i++) { // Validação para que o modelo não contenha números
                         if (!Character.isLetter(s1.modelo.charAt(i))) {
                             System.err.println("O modelo só pode conter letras!");
                             System.exit(0);
