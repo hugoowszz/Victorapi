@@ -5,6 +5,9 @@ public class Servico {
     public int servico;
     public String modelo;
     public int ano;
+    public int previsaoDiaEntrega;
+    public int previsaoMesEntrega;
+    public double orcamento;
 
     private String tipoServico() {
         String tipo = null;
@@ -26,6 +29,6 @@ public class Servico {
     }
 
     public void imprimir() {
-        System.out.println("Cliente: " + this.cliente + "\nModelo: " + this.modelo + "\nAno: " + this.ano + "\nTipo de serviço: " + this.tipoServico());
+        System.out.println("Cliente: " + this.cliente + "\nModelo: " + this.modelo + "\nAno: " + this.ano + "\nTipo de serviço: " + this.tipoServico() + "\nPrevisão entrega: " + this.previsaoDiaEntrega + "/" + this.previsaoMesEntrega + "\nOrçamento: " + this.orcamento + " Reais");
     }
 }
