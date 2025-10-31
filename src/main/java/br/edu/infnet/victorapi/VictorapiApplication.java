@@ -1,5 +1,6 @@
 package br.edu.infnet.victorapi;
 
+import br.edu.infnet.victorapi.model.domain.Funcionario;
 import br.edu.infnet.victorapi.model.domain.Servico;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,14 +18,15 @@ public class VictorapiApplication {
         Date hoje = new Date();
         int diaHoje = hoje.getDate();
         int mesHoje = hoje.getMonth()+1;
+        String[] funcionarios = new String[6];
+        int n = 0;
         do {
-            System.out.println("----------\n" + diaHoje + "/" + mesHoje + "\n1 - Cadastrar serviço\n0 - Sair\n----------");
+            System.out.println("----------\n" + diaHoje + "/" + mesHoje + "\n1 - Cadastrar serviço\n2 - Cadastrar funcionario\n3 - Exibir funcionarios\n0 - Sair\n----------");
             System.out.print("Escolha uma das opções: ");
             int opcao = Integer.parseInt(in.nextLine());
             switch (opcao) {
                 case 1:
                     Servico s1 = new Servico();
-
                     System.out.println("Digite o nome do cliente: ");
                     s1.cliente = in.nextLine();
                     for(int i = 0; i < s1.cliente.length(); i++) { // Validação para que o nome não contenha números
@@ -59,6 +61,33 @@ public class VictorapiApplication {
 
                     s1.imprimir();
                     break;
+//                    ------------------------------------------------------------------------------------------
+                case 2:
+                    Funcionario funcionario = new Funcionario();
+                    System.out.println("1 - Criar novo funcionario"+"\n0 - Sair");
+                    int opcaoFuncionario = Integer.parseInt(in.nextLine());
+                        switch(opcaoFuncionario) {
+                            case 1:
+                                System.out.println("Digite o nome do funcionario: ");
+                                String nomeFuncionario = in.nextLine();
+                                System.out.println("Digite a idade do funcionario: ");
+                                int idadeFuncionario = Integer.parseInt(in.nextLine());
+                                funcionarios[n] = funcionario.NovoFuncionario(nomeFuncionario, idadeFuncionario);
+                                n++;
+                                System.out.println("Funcionario criado com sucesso!");
+                                break;
+                            case 0:
+                                System.out.println("Cadastro encerrado!");
+                                break;
+                        }
+                    break;
+//                    ---------------------------------------------------------------------------------------
+                case 3:
+                    for(int i = 0; i < funcionarios.length; i++) {
+                        System.out.println(funcionarios[i]);
+                    }
+                    break;
+//                    ---------------------------------------------------------------------------------------
                 case 0:
                     System.out.println("Aplicação encerrada!");
                     continuar = false;
