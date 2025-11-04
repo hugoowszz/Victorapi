@@ -43,10 +43,7 @@ public class VictorapiApplication {
 
                     Servico novoServico = new Servico(cliente, servico, modelo, ano, previsaoDiaEntrega, previsaoMesEntrega, orcamento);
                     servicos.add(novoServico);
-                    System.out.println("----- Lista de serviços -----");
-                    for (Servico s: servicos) {
-                        System.out.println(s);
-                    }
+                    novoServico.imprimir();
                     break;
                 case 2:
                     System.out.println("Digite o nome do funcionario: ");
@@ -56,10 +53,6 @@ public class VictorapiApplication {
 
                     Funcionario novoFuncionario = new Funcionario(nome, idade);
                     funcionarios.add(novoFuncionario);
-                    System.out.println("----- Lista de funcionarios -----");
-                    for (Funcionario f : funcionarios) {
-                        System.out.println(f);
-                    }
                     break;
                 case 3:
                     System.out.println("----- Lista de serviços -----");
