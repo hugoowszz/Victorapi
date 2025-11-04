@@ -21,7 +21,7 @@ public class VictorapiApplication {
         List<Servico> servicos = new ArrayList<>();
 
         do {
-            System.out.println("----------\n1 - Cadastrar serviço\n2 - Cadastrar funcionario\n0 - Sair\n----------");
+            System.out.println("----------\n1 - Cadastrar serviço\n2 - Cadastrar funcionario\n3 - Lista de serviços\n4 - Lista de funcionarios\n0 - Sair\n----------");
             System.out.print("Escolha uma das opções: ");
             int opcao = Integer.parseInt(in.nextLine());
             switch (opcao) {
@@ -56,6 +56,18 @@ public class VictorapiApplication {
 
                     Funcionario novoFuncionario = new Funcionario(nome, idade);
                     funcionarios.add(novoFuncionario);
+                    System.out.println("----- Lista de funcionarios -----");
+                    for (Funcionario f : funcionarios) {
+                        System.out.println(f);
+                    }
+                    break;
+                case 3:
+                    System.out.println("----- Lista de serviços -----");
+                    for (Servico s: servicos) {
+                        System.out.println(s);
+                    }
+                    break;
+                case 4:
                     System.out.println("----- Lista de funcionarios -----");
                     for (Funcionario f : funcionarios) {
                         System.out.println(f);
