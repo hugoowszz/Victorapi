@@ -4,7 +4,6 @@ import br.edu.infnet.victorapi.model.domain.Funcionario;
 import br.edu.infnet.victorapi.model.domain.Servico;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,9 +18,14 @@ public class VictorapiApplication {
 
         List<Funcionario> funcionarios = new ArrayList<>();
         List<Servico> servicos = new ArrayList<>();
-
+/*
+        Servico novoServico1 = new Servico("Victor", 3, "Civic", 2020, 10, 12, 2000);// auto cadastramento de serviço para facilitar testes
+        servicos.add(novoServico1);
+        Servico novoServico2 = new Servico("Carlos", 3, "Corolla", 2020, 12, 1, 2500);
+        servicos.add(novoServico2);
+*/
         do {
-            System.out.println("----------\n1 - Cadastrar serviço\n2 - Cadastrar funcionario\n3 - Lista de serviços\n4 - Lista de funcionarios\n0 - Sair\n----------");
+            System.out.println("----------\n1 - Cadastrar serviço\n2 - Cadastrar funcionario\n3 - Lista de serviços\n4 - Lista de funcionarios\n5 - Remover serviço\n0 - Sair\n----------");
             System.out.print("Escolha uma das opções: ");
             int opcao = Integer.parseInt(in.nextLine());
             switch (opcao) {
@@ -64,6 +68,21 @@ public class VictorapiApplication {
                     System.out.println("----- Lista de funcionarios -----");
                     for (Funcionario f : funcionarios) {
                         System.out.println(f);
+                    }
+                    break;
+                case 5:
+                    System.out.println("----- Lista de serviços -----");
+                    for(int i = 0; i < servicos.size(); i++) {
+                        System.out.println(servicos.get(i) + "ID: " + i + "\n----------\n");
+                    }
+                    System.out.println("Digite o id do serviço que deseja remover");
+                    int idRemover = Integer.parseInt(in.nextLine());
+                    System.out.println("Digite S para a remoção do serviço de ID: " + idRemover);
+                    char confirmar = in.nextLine().toUpperCase().charAt(0);
+                    if(confirmar == 'S') {
+                        servicos.remove(idRemover);
+                    } else {
+                        System.out.println("Remoção cancelada");
                     }
                     break;
                 case 0:
