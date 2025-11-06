@@ -21,7 +21,11 @@ public class Servico {
     }
 
     public String toString() {
-    return "Cliente: " + this.cliente + "\nTipo de serviço: " + tipoServico() + "\nModelo: " + modelo + "\nAno: " + ano + "\nPrevisão de entrega: " + previsaoDiaEntrega + "/" + previsaoMesEntrega + "\nPreço: " + orcamento + "\n";
+        return "Cliente: " + this.cliente + "\nTipo de serviço: " + tipoServico() + "\nModelo: " + modelo + "\nAno: " + ano + "\nPrevisão de entrega: " + previsaoDiaEntrega + "/" + previsaoMesEntrega + "\nPreço: " + orcamento + "\n";
+    }
+
+    public String sList() {
+        return "Cliente: " + this.cliente + " Tipo de serviço: " + tipoServico() + " Modelo: " + modelo + "\nAno: " + ano + " Previsão de entrega: " + previsaoDiaEntrega + "/" + previsaoMesEntrega + " Preço: " + orcamento;
     }
 
     private String tipoServico() {
