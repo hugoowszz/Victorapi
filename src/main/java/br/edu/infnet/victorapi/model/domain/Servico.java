@@ -8,6 +8,8 @@ public class Servico {
     public int previsaoDiaEntrega;
     public int previsaoMesEntrega;
     public double orcamento;
+    public int diaEntrega;
+    public int mesEntrega;
 
     public Servico(String cliente, int servico, String modelo, int ano, int previsaoDiaEntrega, int previsaoMesEntrega, double orcamento) {
         this.cliente = cliente;

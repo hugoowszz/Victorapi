@@ -121,11 +121,73 @@ public class VictorapiApplication {
                                     break;
                             }
                             System.out.println("Forma de pagamento selecionada: " + pagamento);
-                            System.out.println("Serviço " + servicos.get(idFinalizar).sList() + " finalizado com sucesso!");
+                            System.out.println("Digite o dia em que a entrega foi feita");
+                            servicos.get(idFinalizar).diaEntrega = Integer.parseInt(in.nextLine());
+                            System.out.println("Digite o mês em que a entrega foi feita");
+                            servicos.get(idFinalizar).mesEntrega = Integer.parseInt(in.nextLine());
+                            System.out.println("Serviço " + servicos.get(idFinalizar).sList() + " foi finalizado com sucesso!");
                             servicosFinalizados.add(servicos.get(idFinalizar));
                             servicos.remove(idFinalizar);
                         } else {
                             System.out.println("Finalização cancelada");
+                        }
+                        break;
+                    case 7:
+                        System.out.println("Digite o mês que deseja filtrar a busca");
+                        String filtrarMes = in.nextLine().toLowerCase();
+                        int idMes = 0;
+                        switch (filtrarMes) {
+                            case "janeiro":
+                                idMes = 1;
+                                break;
+                            case "fevereiro":
+                                idMes = 2;
+                                break;
+                            case "março":
+                                idMes = 3;
+                                break;
+                            case "abril":
+                                idMes = 4;
+                                break;
+                            case "maio":
+                                idMes = 5;
+                                break;
+                            case "junho":
+                                idMes = 6;
+                                break;
+                            case "julho":
+                                idMes = 7;
+                                break;
+                            case "agosto":
+                                idMes = 8;
+                                break;
+                            case "setembro":
+                                idMes = 9;
+                                break;
+                            case "outubro":
+                                idMes = 10;
+                                break;
+                            case "novembro":
+                                idMes = 11;
+                                break;
+                            case "dezembro":
+                                idMes = 12;
+                                break;
+                            default:
+                                System.err.println("Entrada incorreta! Escreva o nome do mês que deseja filtrar a busca,");
+                        }
+                        int i = 0;
+                        boolean encontrado = false;
+                        while (i < servicosFinalizados.size()) {
+                            if(servicosFinalizados.get(i).mesEntrega == idMes) {
+                                System.out.println("----- Lista de serviços entregues em " + filtrarMes +"-----");
+                                System.out.println(servicosFinalizados.get(i).sList());
+                                encontrado = true;
+                            }
+                            i++;
+                        }
+                        if(!encontrado) {
+                            System.out.println("Nenhum serviço foi entregue no mês de " + filtrarMes + "!");
                         }
                         break;
                     case 0:
