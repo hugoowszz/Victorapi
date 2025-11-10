@@ -1,8 +1,12 @@
 package br.edu.infnet.victorapi.model.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Funcionario {
-    String nome;
-    int idade;
+    public String nome;
+    public int idade;
+    public double faturamento;
 
     public Funcionario(String nome, int idade) {
         this.nome = nome;

@@ -24,13 +24,16 @@ public class VictorapiApplication {
         servicos.add(novoServico1);
         Servico novoServico2 = new Servico("Carlos", 3, "Corolla", 2020, 12, 1, 2500);
         servicos.add(novoServico2);
+        Funcionario funcionario1 = new Funcionario("Victor", 19);
+        funcionarios.add(funcionario1);
 
         do {
-            System.out.println("----------\n1 - Cadastrar serviço\n2 - Cadastrar funcionario\n3 - Lista de serviços\n4 - Lista de funcionarios\n5 - Remover serviço\n6 - Finalizar serviço\n7 - Lista de serviços entregues\n0 - Sair\n----------");
+            System.out.println("----------\n1 - Cadastrar serviço\n2 - Cadastrar funcionario\n3 - Lista de serviços\n4 - Lista de funcionarios\n5 - Remover serviço\n6 - Finalizar serviço\n7 - Lista de serviços entregues\n8 - Faturamento de funcionarios\n0 - Sair\n----------");
             System.out.print("Escolha uma das opções: ");
             if (!in.hasNextInt()) {
                 System.err.println("Digite um numero para selecionar a opção!");
-                break;
+                in.nextLine();
+                continue;
             }
             int opcao = Integer.parseInt(in.nextLine());
                 switch (opcao) {
@@ -80,15 +83,20 @@ public class VictorapiApplication {
                         for (int i = 0; i < servicos.size(); i++) {
                             System.out.println(servicos.get(i) + "ID: " + i + "\n----------\n");
                         }
-                        System.out.println("Digite o id do serviço que deseja remover");
+                        System.out.println("Digite o id do serviço que deseja remover:");
                         int idRemover = Integer.parseInt(in.nextLine());
-                        System.out.println("Digite S para a remoção do serviço de ID: " + idRemover);
-                        char confirmar = in.nextLine().toUpperCase().charAt(0);
-                        if (confirmar == 'S') {
-                            servicos.remove(idRemover);
+                        if(idRemover >= 0 && idRemover < servicos.size()) {
+                            System.out.println("Digite S para a remoção do serviço de ID: " + idRemover);
+                            char confirmar = in.nextLine().toUpperCase().charAt(0);
+                            if (confirmar == 'S') {
+                                servicos.remove(idRemover);
+                            } else {
+                                System.out.println("Remoção cancelada");
+                            }
                         } else {
-                            System.out.println("Remoção cancelada");
+                            System.err.println("ID inválido! nenhum serviço foi removido.");
                         }
+
                         break;
                     case 6:
                         System.out.println("----- Lista de serviços -----");
@@ -121,10 +129,18 @@ public class VictorapiApplication {
                                     break;
                             }
                             System.out.println("Forma de pagamento selecionada: " + pagamento);
-                            System.out.println("Digite o dia em que a entrega foi feita");
+                            System.out.println("Digite o dia em que a entrega foi feita:");
                             servicos.get(idFinalizar).diaEntrega = Integer.parseInt(in.nextLine());
-                            System.out.println("Digite o mês em que a entrega foi feita");
+                            System.out.println("Digite o mês em que a entrega foi feita:");
                             servicos.get(idFinalizar).mesEntrega = Integer.parseInt(in.nextLine());
+                            System.out.println("Digite o nome do funcionario que realizou o serviço:");
+                            String funcRealizou = in.nextLine();
+                            for(int r = 0; r < funcionarios.size(); r++) {
+                                if(funcionarios.get(r).nome.equals(funcRealizou) || funcionarios.get(r).nome.toLowerCase().equals(funcRealizou.toLowerCase())) {
+                                    System.out.println("Funcionario selecionado com sucesso!");
+                                    funcionarios.get(r).faturamento += servicos.get(idFinalizar).orcamento;
+                                }
+                            }
                             System.out.println("Serviço " + servicos.get(idFinalizar).sList() + " foi finalizado com sucesso!");
                             servicosFinalizados.add(servicos.get(idFinalizar));
                             servicos.remove(idFinalizar);
@@ -189,6 +205,16 @@ public class VictorapiApplication {
                         if(!encontrado) {
                             System.out.println("Nenhum serviço foi entregue no mês de " + filtrarMes + "!");
                         }
+                        break;
+                    case 8:
+                        System.out.println("Digite o nome do funcionario que deseja consultar os ganhos");
+                        String nomeFunGanho = in.nextLine();
+                        for(int f = 0; f < funcionarios.size(); f++) {
+                            if(funcionarios.get(f).nome.equals(nomeFunGanho) || funcionarios.get(f).nome.toLowerCase().equals(nomeFunGanho.toLowerCase())) {
+                                System.out.println("Faturamento: " + funcionarios.get(f).faturamento);
+                            }
+                        }
+
                         break;
                     case 0:
                         System.out.println("Aplicação encerrada!");
