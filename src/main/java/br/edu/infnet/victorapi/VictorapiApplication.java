@@ -11,7 +11,7 @@ import java.util.Scanner;
 @SpringBootApplication
 public class VictorapiApplication {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		SpringApplication.run(VictorapiApplication.class, args);
         Scanner in = new Scanner(System.in);
         boolean continuar = true;
@@ -20,10 +20,6 @@ public class VictorapiApplication {
         List<Servico> servicos = new ArrayList<>();
         List<Servico> servicosFinalizados = new ArrayList<>();
 
-        Servico novoServico1 = new Servico("Victor", 3, "Civic", 2020, 10, 12, 2000);// auto cadastramento de serviço para facilitar testes
-        servicos.add(novoServico1);
-        Servico novoServico2 = new Servico("Carlos", 3, "Corolla", 2020, 12, 1, 2500);
-        servicos.add(novoServico2);
         Funcionario funcionario1 = new Funcionario("Victor", 19);
         funcionarios.add(funcionario1);
 
@@ -38,22 +34,28 @@ public class VictorapiApplication {
             int opcao = Integer.parseInt(in.nextLine());
                 switch (opcao) {
                     case 1:
+                        Servico novoServico = new Servico();
                         System.out.println("Digite o nome do cliente: ");
                         String cliente = in.nextLine();
+                        novoServico.setCliente(cliente);
                         System.out.println("Escolha o serviço desejado:\n 1 - Recuperação e pintura \n 2 - Cyborg \n 3 - Polimento \n 0 - Sair");
                         int servico = Integer.parseInt(in.nextLine());
+                        novoServico.setServico(servico);
                         System.out.println("Digite o dia previsto para entrega: ");
                         int previsaoDiaEntrega = Integer.parseInt(in.nextLine());
+                        novoServico.setDiaEntrega(previsaoDiaEntrega);
                         System.out.println("Digite o mês previsto para entrega: ");
                         int previsaoMesEntrega = Integer.parseInt(in.nextLine());
+                        novoServico.setMesEntrega(previsaoMesEntrega);
                         System.out.println("Digite o modelo do carro: ");
                         String modelo = in.nextLine();
+                        novoServico.setModelo(modelo);
                         System.out.println("Digite o ano do carro: ");
                         int ano = Integer.parseInt(in.nextLine());
+                        novoServico.setAno(ano);
                         System.out.println("Digite o valor do serviço: ");
                         double orcamento = Double.parseDouble(in.nextLine());
-
-                        Servico novoServico = new Servico(cliente, servico, modelo, ano, previsaoDiaEntrega, previsaoMesEntrega, orcamento);
+                        novoServico.setOrcamento(orcamento);
                         servicos.add(novoServico);
                         novoServico.imprimir();
                         break;
@@ -130,15 +132,15 @@ public class VictorapiApplication {
                             }
                             System.out.println("Forma de pagamento selecionada: " + pagamento);
                             System.out.println("Digite o dia em que a entrega foi feita:");
-                            servicos.get(idFinalizar).diaEntrega = Integer.parseInt(in.nextLine());
+                            servicos.get(idFinalizar).setDiaEntrega(Integer.parseInt(in.nextLine()));
                             System.out.println("Digite o mês em que a entrega foi feita:");
-                            servicos.get(idFinalizar).mesEntrega = Integer.parseInt(in.nextLine());
+                            servicos.get(idFinalizar).setMesEntrega(Integer.parseInt(in.nextLine()));
                             System.out.println("Digite o nome do funcionario que realizou o serviço:");
                             String funcRealizou = in.nextLine();
                             for(int r = 0; r < funcionarios.size(); r++) {
                                 if(funcionarios.get(r).nome.equals(funcRealizou) || funcionarios.get(r).nome.toLowerCase().equals(funcRealizou.toLowerCase())) {
                                     System.out.println("Funcionario selecionado com sucesso!");
-                                    funcionarios.get(r).faturamento += servicos.get(idFinalizar).orcamento;
+                                    funcionarios.get(r).faturamento += servicos.get(idFinalizar).getOrcamento();
                                 }
                             }
                             System.out.println("Serviço " + servicos.get(idFinalizar).sList() + " foi finalizado com sucesso!");
@@ -195,7 +197,7 @@ public class VictorapiApplication {
                         int i = 0;
                         boolean encontrado = false;
                         while (i < servicosFinalizados.size()) {
-                            if(servicosFinalizados.get(i).mesEntrega == idMes) {
+                            if(servicosFinalizados.get(i).getMesEntrega() == idMes) {
                                 System.out.println("----- Lista de serviços entregues em " + filtrarMes +"-----");
                                 System.out.println(servicosFinalizados.get(i).sList());
                                 encontrado = true;
