@@ -15,6 +15,6 @@ public class Funcionario {
     }
 
     public String toString() {
-        return "Funcionario: " + this.nome + "\nIdade: " + this.idade + "anos\n";
+        return "Funcionario: " + this.nome + "\nIdade: " + this.idade + "anos";
     }
 }
