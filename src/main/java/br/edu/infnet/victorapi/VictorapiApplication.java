@@ -20,6 +20,8 @@ public class VictorapiApplication {
         List<Servico> servicos = new ArrayList<>();
         List<Servico> servicosFinalizados = new ArrayList<>();
 
+        Servico servico2 = new Servico("Livia", 3 ,"chevette", 1990, 29, 05, 2000 );
+        servicos.add(servico2);
         Funcionario funcionario1 = new Funcionario("Victor", 19);
         funcionarios.add(funcionario1);
 
@@ -43,10 +45,10 @@ public class VictorapiApplication {
                         novoServico.setServico(servico);
                         System.out.println("Digite o dia previsto para entrega: ");
                         int previsaoDiaEntrega = Integer.parseInt(in.nextLine());
-                        novoServico.setDiaEntrega(previsaoDiaEntrega);
+                        novoServico.setPrevisaoDiaEntrega(previsaoDiaEntrega);
                         System.out.println("Digite o mês previsto para entrega: ");
                         int previsaoMesEntrega = Integer.parseInt(in.nextLine());
-                        novoServico.setMesEntrega(previsaoMesEntrega);
+                        novoServico.setPrevisaoMesEntrega(previsaoMesEntrega);
                         System.out.println("Digite o modelo do carro: ");
                         String modelo = in.nextLine();
                         novoServico.setModelo(modelo);
@@ -64,10 +66,18 @@ public class VictorapiApplication {
                         String nome = in.nextLine();
                         System.out.println("Digite a idade do funcionario: ");
                         int idade = Integer.parseInt(in.nextLine());
-
-                        Funcionario novoFuncionario = new Funcionario(nome, idade);
-                        funcionarios.add(novoFuncionario);
-                        break;
+                        System.out.println("Este funcionario receberá salario fixo?\n1 - Sim\n2 - Não");
+                        if (in.nextLine().equals("1")) {
+                            System.out.println("Digite o salario do funcionario: ");
+                            int salario = Integer.parseInt(in.nextLine());
+                            Funcionario novoFuncionario1 = new Funcionario(nome, idade, salario);
+                            funcionarios.add(novoFuncionario1);
+                            break;
+                        } else {
+                            Funcionario novoFuncionario = new Funcionario(nome, idade);
+                            funcionarios.add(novoFuncionario);
+                            break;
+                        }
                     case 3:
                         System.out.println("----- Lista de serviços -----");
                         for (Servico s : servicos) {
@@ -138,9 +148,9 @@ public class VictorapiApplication {
                             System.out.println("Digite o nome do funcionario que realizou o serviço:");
                             String funcRealizou = in.nextLine();
                             for(int r = 0; r < funcionarios.size(); r++) {
-                                if(funcionarios.get(r).nome.equals(funcRealizou) || funcionarios.get(r).nome.toLowerCase().equals(funcRealizou.toLowerCase())) {
+                                if(funcionarios.get(r).getNome().equals(funcRealizou) || funcionarios.get(r).getNome().toLowerCase().equals(funcRealizou.toLowerCase())) {
                                     System.out.println("Funcionario selecionado com sucesso!");
-                                    funcionarios.get(r).faturamento += servicos.get(idFinalizar).getOrcamento();
+                                    funcionarios.get(r).setFaturamento(servicos.get(idFinalizar).getOrcamento());
                                 }
                             }
                             System.out.println("Serviço " + servicos.get(idFinalizar).sList() + " foi finalizado com sucesso!");
@@ -212,8 +222,8 @@ public class VictorapiApplication {
                         System.out.println("Digite o nome do funcionario que deseja consultar os ganhos");
                         String nomeFunGanho = in.nextLine();
                         for(int f = 0; f < funcionarios.size(); f++) {
-                            if(funcionarios.get(f).nome.equals(nomeFunGanho) || funcionarios.get(f).nome.toLowerCase().equals(nomeFunGanho.toLowerCase())) {
-                                System.out.println("Faturamento: " + funcionarios.get(f).faturamento);
+                            if(funcionarios.get(f).getNome().equals(nomeFunGanho) || funcionarios.get(f).getNome().toLowerCase().equals(nomeFunGanho.toLowerCase())) {
+                                System.out.println("Faturamento: " + funcionarios.get(f).getFaturamento());
                             }
                         }
 

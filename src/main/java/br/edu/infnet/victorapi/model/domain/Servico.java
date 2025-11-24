@@ -11,8 +11,22 @@ public class Servico {
     private int diaEntrega;
     private int mesEntrega;
 
+    public Servico() {
+        System.out.println("Servico Iniciado");
+    }
+
+    public Servico(String cliente, int servico, String modelo, int ano, int previsaoDiaEntrega, int previsaoMesEntrega, double orcamento) {
+        this.cliente = cliente;
+        this.servico = servico;
+        this.modelo = modelo;
+        this.ano = ano;
+        this.previsaoDiaEntrega = previsaoDiaEntrega;
+        this.previsaoMesEntrega = previsaoMesEntrega;
+        this.orcamento = orcamento;
+    }
+
     public String toString() {
-        return "Cliente: " + this.cliente + "\nTipo de serviço: " + tipoServico() + "\nModelo: " + modelo + "\nAno: " + ano + "\nPrevisão de entrega: " + previsaoDiaEntrega + "/" + previsaoMesEntrega + "\nPreço: " + orcamento;
+        return "Cliente: " + this.cliente + "\nTipo de serviço: " + tipoServico() + "\nModelo: " + modelo + "\nAno: " + ano + "\nPrevisão de entrega: " + previsaoDiaEntrega + "/" + previsaoMesEntrega + "\nPreço: " + orcamento + "\n";
     }
 
     public String sList() {
