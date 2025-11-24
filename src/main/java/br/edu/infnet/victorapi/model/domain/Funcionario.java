@@ -9,6 +9,13 @@ public class Funcionario {
     private int idade;
     private double faturamento;
     private double salario;
+    protected String turno;
+
+    public enum Turno {
+        Manha,
+        tarde,
+        noite
+    }
 
     public Funcionario(String nome, int idade) {
         this.nome = nome;
@@ -18,10 +25,11 @@ public class Funcionario {
 
     //a ideia aqui é ter funcionarios que recebem comissão ou salario fixo
 
-    public Funcionario(String nome, int idade, double salario) {
+    public Funcionario(String nome, int idade, double salario, String turno) {
         this.nome = nome;
         this.idade = idade;
         this.salario = salario;
+        this.turno = turno;
         System.out.println("Funcionario " + nome + " cadastrado com sucesso");
     }
 

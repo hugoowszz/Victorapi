@@ -66,11 +66,25 @@ public class VictorapiApplication {
                         String nome = in.nextLine();
                         System.out.println("Digite a idade do funcionario: ");
                         int idade = Integer.parseInt(in.nextLine());
+                        System.out.println("Em qual turno o funcionario vai trabalhar?\n1 - Manhã\n2 - Tarde\n3 - Noite");
+                        int turnoNum = Integer.parseInt(in.nextLine());
+                        String turno = "a";
+                        switch (turnoNum) {
+                            case 1:
+                                turno = "manhã";
+                                break;
+                            case 2:
+                                turno = "tarde";
+                                break;
+                            case 3:
+                                turno = "noite";
+                                break;
+                        }
                         System.out.println("Este funcionario receberá salario fixo?\n1 - Sim\n2 - Não");
                         if (in.nextLine().equals("1")) {
                             System.out.println("Digite o salario do funcionario: ");
                             int salario = Integer.parseInt(in.nextLine());
-                            Funcionario novoFuncionario1 = new Funcionario(nome, idade, salario);
+                            Funcionario novoFuncionario1 = new Funcionario(nome, idade, salario, turno);
                             funcionarios.add(novoFuncionario1);
                             break;
                         } else {
@@ -116,7 +130,7 @@ public class VictorapiApplication {
                             System.out.println(servicos.get(i) + "ID: " + i + "\n----------\n");
                         }
                         System.out.println("Digite o id do serviço que deseja finalizar");
-                        int  idFinalizar = Integer.parseInt(in.nextLine());
+                        int idFinalizar = Integer.parseInt(in.nextLine());
                         System.out.println("Digite S para dar confirmar a finalização do serviço de ID: " + idFinalizar);
                         char finalizar = in.nextLine().toUpperCase().charAt(0);
                         String pagamento = "";
