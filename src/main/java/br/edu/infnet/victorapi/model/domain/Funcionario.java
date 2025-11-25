@@ -11,12 +11,6 @@ public class Funcionario {
     private double salario;
     protected String turno;
 
-    public enum Turno {
-        Manha,
-        tarde,
-        noite
-    }
-
     public Funcionario(String nome, int idade) {
         this.nome = nome;
         this.idade = idade;
