@@ -1,6 +1,6 @@
 package br.edu.infnet.victorapi.model.domain;
 
-public class Servico {
+public class Orcamento {
     private String cliente;
     private int servico;
     private String modelo;
@@ -12,11 +12,11 @@ public class Servico {
     private int mesEntrega;
 
 
-    public Servico() {
+    public Orcamento() {
         System.out.println("Servico Iniciado");
     }
 
-    public Servico(String cliente, int servico, String modelo, int ano, int previsaoDiaEntrega, int previsaoMesEntrega, double orcamento) {
+    public Orcamento(String cliente, int servico, String modelo, int ano, int previsaoDiaEntrega, int previsaoMesEntrega, double orcamento) {
         this.cliente = cliente;
         this.servico = servico;
         this.modelo = modelo;

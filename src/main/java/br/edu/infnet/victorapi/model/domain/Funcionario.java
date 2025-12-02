@@ -9,7 +9,16 @@ public class Funcionario {
     private int idade;
     private double faturamento;
     private double salario;
+    private boolean ativo;
     protected String turno;
+
+    public void isAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public void isNotAtivo() {
+        this.ativo = false;
+    }
 
     public Funcionario(String nome, int idade) {
         this.nome = nome;
@@ -26,9 +35,9 @@ public class Funcionario {
         this.turno = turno;
         System.out.println("Funcionario " + nome + " cadastrado com sucesso");
     }
-
+    @Override
     public String toString() {
-        return "Funcionario: " + this.nome + "\nIdade: " + this.idade + "anos";
+        return "Funcionario: " + this.nome + "\nIdade: " + this.idade + " anos\nSituação: " + ativo;
     }
     public void setNome(String nome) {
         this.nome = nome;
