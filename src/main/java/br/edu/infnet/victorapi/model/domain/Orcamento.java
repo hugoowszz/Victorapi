@@ -1,6 +1,8 @@
 package br.edu.infnet.victorapi.model.domain;
 
-public class Orcamento {
+import br.edu.infnet.victorapi.VictorapiApplication;
+
+public class Orcamento extends VictorapiApplication {
     private String cliente;
     private int servico;
     private String modelo;
@@ -10,7 +12,6 @@ public class Orcamento {
     private double orcamento;
     private int diaEntrega;
     private int mesEntrega;
-
 
     public Orcamento() {
         System.out.println("Servico Iniciado");
@@ -25,9 +26,9 @@ public class Orcamento {
         this.previsaoMesEntrega = previsaoMesEntrega;
         this.orcamento = orcamento;
     }
-
+    @Override
     public String toString() {
-        return "Cliente: " + this.cliente + "\nTipo de serviço: " + tipoServico() + "\nModelo: " + modelo + "\nAno: " + ano + "\nPrevisão de entrega: " + previsaoDiaEntrega + "/" + previsaoMesEntrega + "\nPreço: " + orcamento + "\n";
+        return "Cliente: " + this.cliente + "\nTipo de serviço: " + tipoServico() + "\nModelo: " + modelo + "\nAno: " + ano + "\nPrevisão de entrega: " + previsaoDiaEntrega + "/" + previsaoMesEntrega + "\nPreço: " + orcamento + "\nId:";
     }
 
     public String sList() {

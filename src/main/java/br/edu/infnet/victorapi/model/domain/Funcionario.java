@@ -37,7 +37,7 @@ public class Funcionario {
     }
     @Override
     public String toString() {
-        return "Funcionario: " + this.nome + "\nIdade: " + this.idade + " anos\nSituação: " + ativo;
+        return "Funcionario: " + this.nome + "\nIdade: " + this.idade + " anos\nSituação: " + ativo + "\nId: ";
     }
     public void setNome(String nome) {
         this.nome = nome;
