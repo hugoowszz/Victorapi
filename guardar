@@ -1,0 +1,16 @@
+validação
+do {
+                        System.out.println("Digite o nome do funcionario que deseja adicionar ao serviço: ");
+                        String nomeFunLido = in.nextLine();
+                        for (int n = 0; n < funcionarios.size(); n++) {
+                            if (nomeFunLido.toLowerCase().equals(funcionarios.get(n).getNome().toLowerCase())) {
+                                selecionou1 = true;
+                                System.out.println("Funcionario(a): " + nomeFunLido + " selecionado!");
+                                break;
+                            }
+                            if(n == funcionarios.size() - 1) {
+                                System.err.println("Erro!");
+                                break;
+                            }
+                        }
+                    } while (selecionou1 == false);
