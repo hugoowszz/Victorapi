@@ -2,6 +2,7 @@ package br.edu.infnet.victorapi;
 
 import br.edu.infnet.victorapi.model.domain.Funcionario;
 import br.edu.infnet.victorapi.model.domain.Orcamento;
+import br.edu.infnet.victorapi.model.domain.Servico;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.ArrayList;
@@ -17,14 +18,10 @@ public class VictorapiApplication {
         boolean continuar = true;
 
         List<Funcionario> funcionarios = new ArrayList<>();
-        List<Orcamento> orcamentos = new ArrayList<>();
-        List<Orcamento> servicosFinalizados = new ArrayList<>();
+        List<Servico> orcamentos = new ArrayList<>();
+        List<Servico> servicosFinalizados = new ArrayList<>();
 
         List<String> funcionariosDesignados = new ArrayList<>();
-
-        orcamentos.add(new Orcamento("Livia", 3, "chevette", 1990, 29, 05, 2000));
-        orcamentos.add(new Orcamento("Victor", 3, "astra", 1990, 21, 05, 3400));
-        orcamentos.add(new Orcamento("Vior", 3, "asta", 1990, 21, 05, 3400));
         Funcionario funcionario1 = new Funcionario("Victor", 19);
         funcionario1.isAtivo(true);
         funcionarios.add(funcionario1);
@@ -53,30 +50,10 @@ public class VictorapiApplication {
             } while (!escolheu);
             switch (opcao) {
                 case 1:
-                    Orcamento novoOrcamento = new Orcamento();
-                    System.out.println("Digite o nome do cliente: ");
-                    String cliente = in.nextLine();
-                    novoOrcamento.setCliente(cliente);
-                    System.out.println("Escolha o serviço desejado:\n 1 - Recuperação e pintura \n 2 - Cyborg \n 3 - Polimento \n 0 - Sair");
-                    int servico = Integer.parseInt(in.nextLine());
-                    novoOrcamento.setServico(servico);
-                    System.out.println("Digite o dia previsto para entrega: ");
-                    int previsaoDiaEntrega = Integer.parseInt(in.nextLine());
-                    novoOrcamento.setPrevisaoDiaEntrega(previsaoDiaEntrega);
-                    System.out.println("Digite o mês previsto para entrega: ");
-                    int previsaoMesEntrega = Integer.parseInt(in.nextLine());
-                    novoOrcamento.setPrevisaoMesEntrega(previsaoMesEntrega);
-                    System.out.println("Digite o modelo do carro: ");
-                    String modelo = in.nextLine();
-                    novoOrcamento.setModelo(modelo);
-                    System.out.println("Digite o ano do carro: ");
-                    int ano = Integer.parseInt(in.nextLine());
-                    novoOrcamento.setAno(ano);
-                    System.out.println("Digite o valor do serviço: ");
-                    double orcamento = Double.parseDouble(in.nextLine());
-                    novoOrcamento.setOrcamento(orcamento);
-                    orcamentos.add(novoOrcamento);
-                    novoOrcamento.imprimir();
+                    Servico novoServico = new Servico();
+                    novoServico.novoServico();
+                    orcamentos.add(novoServico);
+                    novoServico.imprimir();
                     break;
                 case 2:
             //        do {
@@ -197,7 +174,7 @@ public class VictorapiApplication {
                     break;
                 case 4:
                     System.out.println("----- Lista de serviços -----");
-                    for (Orcamento s : orcamentos) {
+                    for (Servico s : orcamentos) {
                         System.out.println(s);
                     }
                     break;
