@@ -1,16 +1,16 @@
 package br.edu.infnet.victorapi.model.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Funcionario {
 
-    private String nome;
-    private int idade;
+    private String nomeFuncionario;
+    private int idadeFuncionario;
     private double faturamento;
     private double salario;
     private boolean ativo;
     protected String turno;
+
+    public Funcionario() {
+    }
 
     public void isAtivo(boolean ativo) {
         this.ativo = ativo;
@@ -20,27 +20,27 @@ public class Funcionario {
         this.ativo = false;
     }
 
-    public Funcionario(String nome, int idade) {
-        this.nome = nome;
-        this.idade = idade;
-        System.out.println("Funcionario " + nome + " cadastrado com sucesso");
+    public Funcionario(String nomeFuncionario, int idadeFuncionario) {
+        this.nomeFuncionario = nomeFuncionario;
+        this.idadeFuncionario = idadeFuncionario;
+        System.out.println("Funcionario " + nomeFuncionario + " cadastrado com sucesso");
     }
 
     //a ideia aqui é ter funcionarios que recebem comissão ou salario fixo
 
-    public Funcionario(String nome, int idade, double salario, String turno) {
-        this.nome = nome;
-        this.idade = idade;
+    public Funcionario(String nomeFuncionario, int idadeFuncionario, double salario, String turno) {
+        this.nomeFuncionario = nomeFuncionario;
+        this.idadeFuncionario = idadeFuncionario;
         this.salario = salario;
         this.turno = turno;
-        System.out.println("Funcionario " + nome + " cadastrado com sucesso");
+        System.out.println("Funcionario " + nomeFuncionario + " cadastrado com sucesso");
     }
     @Override
     public String toString() {
-        return "Funcionario: " + this.nome + "\nIdade: " + this.idade + " anos\nSituação: " + ativo + "\nId: ";
+        return "Funcionario: " + this.nomeFuncionario + "\nIdade: " + this.idadeFuncionario + " anos\nSituação: " + ativo + "\nId: " + "\nSalário: " + this.salario + "\nTurno: " + this.turno;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeFuncionario(String nomeFuncionario) {
+        this.nomeFuncionario = nomeFuncionario;
     }
 
     public void setSalario(double salario) {
@@ -51,12 +51,12 @@ public class Funcionario {
         this.faturamento = faturamento;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setIdadeFuncionario(int idadeFuncionario) {
+        this.idadeFuncionario = idadeFuncionario;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeFuncionario() {
+        return nomeFuncionario;
     }
 
     public double getSalario() {
@@ -67,7 +67,7 @@ public class Funcionario {
         return faturamento;
     }
 
-    public int getIdade() {
-        return idade;
+    public int getIdadeFuncionario() {
+        return idadeFuncionario;
     }
 }

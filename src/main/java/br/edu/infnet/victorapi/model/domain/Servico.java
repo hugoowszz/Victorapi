@@ -1,12 +1,9 @@
 package br.edu.infnet.victorapi.model.domain;
 
-import br.edu.infnet.victorapi.VictorapiApplication;
 import java.util.Scanner;
 
-import static org.yaml.snakeyaml.nodes.Tag.STR;
 
-
-public class Servico extends VictorapiApplication {
+public class Servico extends Funcionario {
     private String cliente;
     private int servico;
     private int previsaoDiaEntrega;
@@ -17,22 +14,39 @@ public class Servico extends VictorapiApplication {
     private int ano;
     private double orcamento;
 
-    public void novoServico() {
-        Scanner in = new Scanner(System.in);
+
+    public Servico() {
+    }
+
+    public Servico(String cliente, int servico, int previsaoDiaEntrega, int previsaoMesEntrega, String modelo, int ano, double orcamento, String funcionario) {
+        super();
+        this.cliente = cliente;
+        this.servico = servico;
+        this.previsaoDiaEntrega = previsaoDiaEntrega;
+        this.previsaoMesEntrega = previsaoMesEntrega;
+        this.modelo = modelo;
+        this.ano = ano;
+        this.orcamento = orcamento;
+        funcionario = super.getNomeFuncionario();
+        this.setNomeFuncionario(funcionario);
+    }
+
+    public void novoOrcamento() {
+        Scanner scan = new Scanner(System.in);
         System.out.println("Digite o nome do cliente: ");
-        this.cliente = in.nextLine();
-        System.out.println("Escolha o serviço desejado:\n 1 - Recuperação e pintura \n 2 - Cyborg \n 3 - Polimento \n 0 - Sair");
-        this.servico = Integer.parseInt(in.nextLine());
+        this.cliente = scan.nextLine();
+        System.out.println("Escolha o serviço desejado:\n 1 - Recuperação e pintura \n 2 - Cyborg \n 3 - Polimento");
+        this.servico = Integer.parseInt(scan.nextLine());
         System.out.println("Digite o dia previsto para entrega: ");
-        this.previsaoDiaEntrega = Integer.parseInt(in.nextLine());
+        this.previsaoDiaEntrega = Integer.parseInt(scan.nextLine());
         System.out.println("Digite o mês previsto para entrega: ");
-        this.previsaoMesEntrega = Integer.parseInt(in.nextLine());
+        this.previsaoMesEntrega = Integer.parseInt(scan.nextLine());
         System.out.println("Digite o modelo do carro: ");
-        this.modelo = in.nextLine();
+        this.modelo = scan.nextLine();
         System.out.println("Digite o ano do carro: ");
-        this.ano = Integer.parseInt(in.nextLine());
+        this.ano = Integer.parseInt(scan.nextLine());
         System.out.println("Digite o valor do serviço: ");
-        this.orcamento = Double.parseDouble(in.nextLine());
+        this.orcamento = Double.parseDouble(scan.nextLine());
     }
 
     public void imprimir() {
@@ -41,11 +55,13 @@ public class Servico extends VictorapiApplication {
 
     @Override
     public String toString() {
-        return "Cliente: " + this.cliente + "\nTipo de serviço: " + servico + "\nModelo: " + modelo + "\nAno: " + ano + "\nPrevisão de entrega: " + previsaoDiaEntrega + "/" + previsaoMesEntrega + "\nPreço: " + orcamento + "\nId:";
-    }
-
-    public String sList() {
-        return "Cliente: " + cliente;
+        return "Cliente: " + this.getCliente() +
+                "\nTipo de serviço: " + getServico() +
+                "\nModelo: " + getModelo() +
+                "\nAno: " + getAno() +
+                "\nPrevisão de entrega: " + getDiaEntrega() + "/" + getMesEntrega() +
+                "\nPreço: " + getOrcamento() +
+                "\nFuncionario Responsável: " + getNomeFuncionario();
     }
 
     public int getDiaEntrega() {
