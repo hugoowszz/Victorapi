@@ -1,23 +1,23 @@
 package br.edu.infnet.victorapi.model.domain;
 
-public class Funcionario {
+public abstract class Funcionario {
 
     private String nomeFuncionario;
     private int idadeFuncionario;
     private double faturamento;
-    private double salario;
     private boolean ativo;
     protected String turno;
-
+    private String verificarAtivo;
     public Funcionario() {
     }
 
     public void isAtivo(boolean ativo) {
         this.ativo = ativo;
-    }
-
-    public void isNotAtivo() {
-        this.ativo = false;
+        if (ativo == true) {
+            verificarAtivo = "Ativo";
+        } else {
+            verificarAtivo = "Inativo";
+        }
     }
 
     public Funcionario(String nomeFuncionario, int idadeFuncionario) {
@@ -26,25 +26,12 @@ public class Funcionario {
         System.out.println("Funcionario " + nomeFuncionario + " cadastrado com sucesso");
     }
 
-    //a ideia aqui é ter funcionarios que recebem comissão ou salario fixo
-
-    public Funcionario(String nomeFuncionario, int idadeFuncionario, double salario, String turno) {
-        this.nomeFuncionario = nomeFuncionario;
-        this.idadeFuncionario = idadeFuncionario;
-        this.salario = salario;
-        this.turno = turno;
-        System.out.println("Funcionario " + nomeFuncionario + " cadastrado com sucesso");
-    }
     @Override
     public String toString() {
-        return "Funcionario: " + this.nomeFuncionario + "\nIdade: " + this.idadeFuncionario + " anos\nSituação: " + ativo + "\nId: " + "\nSalário: " + this.salario + "\nTurno: " + this.turno;
+        return "Funcionario: " + this.nomeFuncionario + "\nIdade: " + this.idadeFuncionario + " anos\nSituação: " + verificarAtivo + "\nTurno: " + this.turno;
     }
     public void setNomeFuncionario(String nomeFuncionario) {
         this.nomeFuncionario = nomeFuncionario;
-    }
-
-    public void setSalario(double salario) {
-        this.salario = salario;
     }
 
     public void setFaturamento(double faturamento) {
@@ -57,10 +44,6 @@ public class Funcionario {
 
     public String getNomeFuncionario() {
         return nomeFuncionario;
-    }
-
-    public double getSalario() {
-        return salario;
     }
 
     public double getFaturamento() {

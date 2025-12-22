@@ -1,6 +1,8 @@
 package br.edu.infnet.victorapi;
 
 import br.edu.infnet.victorapi.model.domain.Funcionario;
+import br.edu.infnet.victorapi.model.domain.FuncionarioComissao;
+import br.edu.infnet.victorapi.model.domain.FuncionarioFixo;
 import br.edu.infnet.victorapi.model.domain.Servico;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,9 +23,15 @@ public class VictorapiApplication {
         List<Servico> servicosFinalizados = new ArrayList<>();
 
         List<String> funcionariosDesignados = new ArrayList<>();
-        Funcionario funcionario1 = new Funcionario("Victor", 19);
-        funcionario1.isAtivo(true);
-        funcionarios.add(funcionario1);
+        //Funcionario funcionario1 = new Funcionario("Victor", 19);
+        //funcionario1.isAtivo(true);
+        //funcionarios.add(funcionario1);
+
+        Funcionario funcFixo1 = new FuncionarioFixo("Victor", 19, 2000, "8h/ dia");
+        Funcionario funcComissao1 = new FuncionarioComissao("Carlos", 45);
+        funcionarios.add(funcComissao1);
+        funcionarios.add(funcFixo1);
+
         Servico  servico1 = new Servico("Elberth", 3, 15, 1, "Corolla", 2025, 7000, "Victor");
         orcamentos.add(servico1);
 
@@ -93,31 +101,35 @@ public class VictorapiApplication {
                         turnoNum = 1;
                     }
                     String turno = "a";
+                    String tipoFunc;
 
                     switch (turnoNum) {
                         case 1:
                             turno = "8 horas / dia";
+                            tipoFunc = "1";
                             break;
                         case 2:
                             turno = "4 horas / dia";
+                            tipoFunc = "1";
                             break;
                         case 3:
                             turno = "Autônomo";
+                            tipoFunc = "2";
                         default:
                             turno = "Autônomo";
+                            tipoFunc = "2";
                     }
-                    System.out.println("Este funcionario receberá salario fixo?\n1 - Sim\n2 - Não");
-                    if (in.nextLine().equals("1")) {
+                    if (tipoFunc.equals("1")) {
                         System.out.println("Digite o salario do funcionario: ");
                         int salario = Integer.parseInt(in.nextLine());
 
-                        Funcionario novoFuncionario1 = new Funcionario(nome, idade, salario, turno);
-                        novoFuncionario1.isAtivo(true);
-                        funcionarios.add(novoFuncionario1);
+                        Funcionario novoFuncionarioFixo = new FuncionarioFixo(nome, idade, salario, turno);
+                        novoFuncionarioFixo.isAtivo(true);
+                        funcionarios.add(novoFuncionarioFixo);
                         break;
                     } else {
-                        Funcionario novoFuncionario = new Funcionario(nome, idade);
-                        funcionarios.add(novoFuncionario);
+                        Funcionario novoFuncionarioComissao = new FuncionarioComissao(nome, idade);
+                        funcionarios.add(novoFuncionarioComissao);
                     }
                     break;
                 case 3:
@@ -153,6 +165,7 @@ public class VictorapiApplication {
                     System.out.println("----- Lista de funcionarios -----");
                     for (Funcionario f : funcionarios) {
                         System.out.println(f);
+                        System.out.println("\n ---------- \n");
                     }
                     break;
                 case 6:
