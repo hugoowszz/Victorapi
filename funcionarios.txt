@@ -1,0 +1,5 @@
+Funcionario: Victor
+Idade: 19 anos
+Situação: Ativo
+Turno: Autônomo
+-----------------------------

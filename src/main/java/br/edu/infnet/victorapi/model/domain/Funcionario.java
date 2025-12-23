@@ -11,12 +11,30 @@ public abstract class Funcionario implements Exibir {
     protected String turno;
     private String verificarAtivo;
 
+    public Funcionario() {
+        this.ativo = true;
+        this.verificarAtivo = "Ativo";
+    }
+
+    public Funcionario(String nomeFuncionario, int idadeFuncionario) {
+        this();
+        this.nomeFuncionario = nomeFuncionario;
+        this.idadeFuncionario = idadeFuncionario;
+    }
+
     public void isAtivo(boolean ativo) {
         this.ativo = ativo;
         if (ativo == true) {
             verificarAtivo = "Ativo";
         } else {
             verificarAtivo = "Inativo";
+        }
+    }
+
+    public void imprimir(boolean mostrarFaturamento) {
+        System.out.println("Nome: " + this.nomeFuncionario + "\nTurno: " + this.turno);
+        if(mostrarFaturamento) {
+            System.out.println("Faturamento: " + this.faturamento);
         }
     }
 

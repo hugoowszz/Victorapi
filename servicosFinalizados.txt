@@ -1,0 +1,41 @@
+Cliente: Elberth
+Tipo de serviço: 3
+Modelo: Corolla
+Ano: 2025
+Previsão de entrega: 15/1
+Preço: 7000.0
+Funcionario Responsável: Victor
+-----------------------------Cliente: Elberth
+Tipo de serviço: 3
+Funcionario Responsavel: Funcionario: Victor
+Idade: 19 anos
+Situação: Ativo
+Turno: 8h/ dia
+Modelo: Corolla
+Ano: 2025
+Previsão de entrega: 15/1
+Preço: 7000.0
+Serviço cancelado: false
+-----------------------------Cliente: Elberth
+Tipo de serviço: 3
+Funcionario Responsavel: Funcionario: Victor
+Idade: 19 anos
+Situação: Ativo
+Turno: 8h/ dia
+Modelo: Corolla
+Ano: 2025
+Previsão de entrega: 15/1
+Preço: 7000.0
+Serviço cancelado: false
+-----------------------------Cliente: Elberth
+Tipo de serviço: 3
+Funcionario Responsavel: Funcionario: Carlos
+Idade: 45 anos
+Situação: Ativo
+Turno: Autônomo
+Modelo: Corolla
+Ano: 2025
+Previsão de entrega: 15/1
+Preço: 7000.0
+Serviço cancelado: false
+-----------------------------

@@ -1,13 +1,11 @@
 package br.edu.infnet.victorapi.model.domain;
 
-public class FuncionarioComissao extends Funcionario {
+public final class FuncionarioComissao extends Funcionario {
 
-    private int comissao = 50;
+    public static final double TAXA_COMISSAO = 0.5;
 
     public FuncionarioComissao(String  nomeFuncionario, int idadeFuncionario) {
-        this.setNomeFuncionario(nomeFuncionario);
-        this.setIdadeFuncionario(idadeFuncionario);
-        this.isAtivo(true);
+        super(nomeFuncionario, idadeFuncionario);
         this.turno = "Autônomo";
     }
 

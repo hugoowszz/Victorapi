@@ -36,7 +36,7 @@ public class VictorapiApplication {
         funcionarios.add(funcComissao1);
         funcionarios.add(funcFixo1);
 
-        Servico  servico1 = new Servico("Elberth", 3, 15, 1, "Corolla", 2025, 7000, "Victor");
+        Servico  servico1 = new Servico("Elberth", 3, 15, 1, "Corolla", 2025, 7000);
         orcamentos.add(servico1);
 
         do {
@@ -46,7 +46,7 @@ public class VictorapiApplication {
             do {
                 System.out.println("----------\n1 - Fazer orçamento\n2 - Cadastrar funcionario\n3 - Iniciar serviço\n4 - Lista de orçamentos" +
                         "\n5 - Lista de funcionarios\n6 - Remover serviço\n7 - Finalizar serviço\n8 - Lista de serviços entregues" +
-                        "\n9 - Faturamento de funcionarios\n0 - Sair\n----------");
+                        "\n9 - Faturamento de funcionarios\n10 - Ler arquivo de funcionarios\n11 - Ler arquivos de orçamentos\n12 - ler arquivo de serviços finalizados\n13 - Consultar faturamento dos funcionarios\n0 - Sair\n----------");
                 System.out.print("Escolha uma das opções: ");
                 if(!in.hasNextInt()) {
                     System.err.println("Erro, digite um numero para selecionar!");
@@ -68,6 +68,31 @@ public class VictorapiApplication {
                     servico.novoOrcamento();
                     orcamentos.add(servico);
                     servico.imprimir();
+
+                    Servico salvarServico = servico;
+
+                    if (salvarServico != null) {
+                        BufferedWriter wr = null;
+                        try {
+                            wr = new BufferedWriter(new FileWriter("orcamentos.txt", true));
+
+                            wr.write(salvarServico.toString());
+                            wr.newLine();
+                            wr.write("-----------------------------");
+
+                            System.out.println("Orçamento salvo com sucesso no arquivo orcamentos.txt!");
+
+                        } catch (IOException e) {
+                            System.err.println("Erro ao salvar orçamento: " + e.getMessage());
+                        } finally {
+                            try {
+                                if (wr != null) wr.close();
+                            } catch (IOException e) {
+                                System.err.println("Erro ao fechar o arquivo: " + e.getMessage());
+                            }
+                        }
+                    }
+
                     break;
                 case 2:
                     boolean hasNome = false;
@@ -123,6 +148,9 @@ public class VictorapiApplication {
                             turno = "Autônomo";
                             tipoFunc = "2";
                     }
+
+                    Funcionario salvarFuncionario = null;
+
                     if (tipoFunc.equals("1")) {
                         System.out.println("Digite o salario do funcionario: ");
                         int salario = Integer.parseInt(in.nextLine());
@@ -131,13 +159,37 @@ public class VictorapiApplication {
                         novoFuncionarioFixo.isAtivo(true);
                         funcionarios.add(novoFuncionarioFixo);
                         novoFuncionarioFixo.imprimir();
-                        break;
+
+                        salvarFuncionario = novoFuncionarioFixo;
                     } else {
                         Funcionario novoFuncionarioComissao = new FuncionarioComissao(nome, idade);
                         funcionarios.add(novoFuncionarioComissao);
                         novoFuncionarioComissao.imprimir();
+
+                        salvarFuncionario = novoFuncionarioComissao;
                     }
-                    BufferedWriter bw = new BufferedWriter(new FileWriter("funcionarios.txt"));
+
+                    if (salvarFuncionario != null) {
+                        BufferedWriter wr = null;
+                        try {
+                            wr = new BufferedWriter(new FileWriter("funcionarios.txt", true));
+
+                            wr.write(salvarFuncionario.toString());
+                            wr.newLine();
+                            wr.write("-----------------------------");
+
+                            System.out.println("Funcionario salvo com sucesso no arquivo funcionarios.txt!");
+
+                        } catch (IOException e) {
+                            System.err.println("Erro ao salvar funcionário: " + e.getMessage());
+                        } finally {
+                            try {
+                                if (wr != null) wr.close();
+                            } catch (IOException e) {
+                                System.err.println("Erro ao fechar o arquivo: " + e.getMessage());
+                            }
+                        }
+                    }
                     break;
                 case 3:
                     boolean selecionou = false;
@@ -171,8 +223,7 @@ public class VictorapiApplication {
                 case 5:
                     System.out.println("----- Lista de funcionarios -----");
                     for (Funcionario f : funcionarios) {
-                        System.out.println(f);
-                        System.out.println("\n ---------- \n");
+                        System.out.println(f + "\n");
                     }
                     break;
                 case 6:
@@ -184,9 +235,9 @@ public class VictorapiApplication {
                     int idRemover = Integer.parseInt(in.nextLine());
                     if (idRemover >= 0 && idRemover < orcamentos.size()) {
                         System.out.println("Digite S para a remoção do serviço de ID: " + idRemover);
-                        char confirmar = in.nextLine().toUpperCase().charAt(0);
-                        if (confirmar == 'S') {
-                            orcamentos.remove(idRemover);
+                        String confirmar = in.nextLine();
+                        if ("s".equalsIgnoreCase(confirmar)) {
+                            orcamentos.get(idRemover).isServicoCancelado(true);
                         } else {
                             System.out.println("Remoção cancelada");
                         }
@@ -240,16 +291,47 @@ public class VictorapiApplication {
                             orcamentos.get(idFinalizar).setMesEntrega(Integer.parseInt(in.nextLine()));
                             System.out.println("Digite o nome do funcionario que realizou o serviço:");
                             String funcRealizou = in.nextLine();
-                            orcamentos.get(idFinalizar).setNomeFuncionario(funcRealizou);
-                            for (int r = 0; r < funcionarios.size(); r++) {
-                                if (funcionarios.get(r).getNomeFuncionario().equals(funcRealizou) || funcionarios.get(r).getNomeFuncionario().toLowerCase().equals(funcRealizou.toLowerCase())) {
-                                    System.out.println("Funcionario selecionado com sucesso!");
-                                    funcionarios.get(r).setFaturamento(orcamentos.get(idFinalizar).getOrcamento());
+                            Funcionario funcionarioEncontrado = null;
+                            for(Funcionario funcionario : funcionarios) {
+                                if(funcionario.getNomeFuncionario().equalsIgnoreCase(funcRealizou)) {
+                                    funcionarioEncontrado = funcionario;
+                                    break;
                                 }
+                            }
+                            if(funcionarioEncontrado != null) {
+                                orcamentos.get(idFinalizar).setFuncionarioResponsavel(funcionarioEncontrado);
+                                if(funcionarioEncontrado instanceof FuncionarioComissao) {
+                                    funcionarioEncontrado.setFaturamento(orcamentos.get(idFinalizar).getOrcamento() * FuncionarioComissao.TAXA_COMISSAO);
+                                }
+                                System.out.println("Funcionario " + funcionarioEncontrado.getNomeFuncionario() + " selecionado com sucesso!");
                             }
                             System.out.println("-----Serviço:-----\n" + orcamentos.get(idFinalizar).toString() + "\n-----foi finalizado com sucesso!-----");
                             servicosFinalizados.add(orcamentos.get(idFinalizar));
+                            Servico salvarServicoFinalizado = orcamentos.get(idFinalizar);
                             orcamentos.remove(idFinalizar);
+
+                            if (salvarServicoFinalizado != null) {
+                                BufferedWriter wr = null;
+                                try {
+                                    wr = new BufferedWriter(new FileWriter("servicosFinalizados.txt", true));
+
+                                    wr.write(salvarServicoFinalizado.toString());
+                                    wr.newLine();
+                                    wr.write("-----------------------------");
+
+                                    System.out.println("Serviço salvo com sucesso no arquivo servicosFinalizados.txt!");
+
+                                } catch (IOException e) {
+                                    System.err.println("Erro ao salvar serviço: " + e.getMessage());
+                                } finally {
+                                    try {
+                                        if (wr != null) wr.close();
+                                    } catch (IOException e) {
+                                        System.err.println("Erro ao fechar o arquivo: " + e.getMessage());
+                                    }
+                                }
+                            }
+
                         } else {
                             System.out.println("Finalização cancelada");
                         }
@@ -257,6 +339,7 @@ public class VictorapiApplication {
                         } catch (NumberFormatException e) {
                         System.err.println("Erro: digite apenas números");
                     }
+
                     break;
                 case 8:
                     System.out.println("Digite o mês que deseja filtrar a busca");
@@ -323,6 +406,87 @@ public class VictorapiApplication {
                         if (funcionarios.get(f).getNomeFuncionario().equals(nomeFunGanho) || funcionarios.get(f).getNomeFuncionario().toLowerCase().equals(nomeFunGanho.toLowerCase())) {
                             System.out.println("Faturamento: " + funcionarios.get(f).getFaturamento());
                         }
+                    }
+                    break;
+                case 10:
+                    java.io.BufferedReader leitorFuncionarios = null;
+                    try {
+                        java.io.File file = new java.io.File("funcionarios.txt");
+                        if (!file.exists()) {
+                            System.err.println("O arquivo 'funcionarios.txt' não existe.");
+                        } else {
+                            leitorFuncionarios = new java.io.BufferedReader(new java.io.FileReader("funcionarios.txt"));
+                            String linha;
+                            while ((linha = leitorFuncionarios.readLine()) != null) {
+                                System.out.println(linha);
+                            }
+                        }
+                    } catch (java.io.IOException e) {
+                        System.err.println("Erro ao ler o arquivo: " + e.getMessage());
+                    } finally {
+                        try {
+                            if (leitorFuncionarios != null) {
+                                leitorFuncionarios.close();
+                            }
+                        } catch (java.io.IOException e) {
+                            System.err.println("Erro ao fechar o leitor: " + e.getMessage());
+                        }
+                    }
+                    break;
+                case 11:
+                    java.io.BufferedReader leitorOrcamentos = null;
+                    try {
+                        java.io.File file = new java.io.File("orcamentos.txt");
+                        if (!file.exists()) {
+                            System.err.println("O arquivo 'orcamentos.txt' não existe.");
+                        } else {
+                            leitorOrcamentos = new java.io.BufferedReader(new java.io.FileReader("orcamentos.txt"));
+                            String linha;
+                            while ((linha = leitorOrcamentos.readLine()) != null) {
+                                System.out.println(linha);
+                            }
+                        }
+                    } catch (java.io.IOException e) {
+                        System.err.println("Erro ao ler o arquivo: " + e.getMessage());
+                    } finally {
+                        try {
+                            if (leitorOrcamentos != null) {
+                                leitorOrcamentos.close();
+                            }
+                        } catch (java.io.IOException e) {
+                            System.err.println("Erro ao fechar o leitor: " + e.getMessage());
+                        }
+                    }
+                    break;
+                case 12:
+                    java.io.BufferedReader leitorServicosFinalizados = null;
+                    try {
+                        java.io.File file = new java.io.File("servicosFinalizados.txt");
+                        if (!file.exists()) {
+                            System.err.println("O arquivo 'servicosFinalizados.txt' não existe.");
+                        } else {
+                            leitorServicosFinalizados = new java.io.BufferedReader(new java.io.FileReader("servicosFinalizados.txt"));
+                            String linha;
+                            while ((linha = leitorServicosFinalizados.readLine()) != null) {
+                                System.out.println(linha);
+                            }
+                        }
+                    } catch (java.io.IOException e) {
+                        System.err.println("Erro ao ler o arquivo: " + e.getMessage());
+                    } finally {
+                        try {
+                            if (leitorServicosFinalizados != null) {
+                                leitorServicosFinalizados.close();
+                            }
+                        } catch (java.io.IOException e) {
+                            System.err.println("Erro ao fechar o leitor: " + e.getMessage());
+                        }
+                    }
+                    break;
+                case 13:
+                    System.out.println("----- Lista de funcionarios -----");
+                    for (int f = 0; f < funcionarios.size(); f++) {
+                        funcionarios.get(f).imprimir(true);
                     }
                     break;
                 case 0:

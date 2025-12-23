@@ -1,0 +1,8 @@
+Cliente: Carlos
+Tipo de serviço: 3
+Modelo: Tucson
+Ano: 2010
+Previsão de entrega: 29/1
+Preço: 1200.0
+Funcionario Responsável: null
+-----------------------------

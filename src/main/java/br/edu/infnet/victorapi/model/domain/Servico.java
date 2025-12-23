@@ -3,7 +3,7 @@ package br.edu.infnet.victorapi.model.domain;
 import java.util.Scanner;
 
 
-public class Servico extends Funcionario {
+public class Servico {
     private String cliente;
     private int servico;
     private int previsaoDiaEntrega;
@@ -13,10 +13,13 @@ public class Servico extends Funcionario {
     private String modelo;
     private int ano;
     private double orcamento;
+    private boolean servicoCancelado = false;
+
+    Funcionario funcionarioResponsavel;
 
     public Servico() {}
 
-    public Servico(String cliente, int servico, int previsaoDiaEntrega, int previsaoMesEntrega, String modelo, int ano, double orcamento, String funcionario) {
+    public Servico(String cliente, int servico, int previsaoDiaEntrega, int previsaoMesEntrega, String modelo, int ano, double orcamento) {
         super();
         this.cliente = cliente;
         this.servico = servico;
@@ -25,11 +28,9 @@ public class Servico extends Funcionario {
         this.modelo = modelo;
         this.ano = ano;
         this.orcamento = orcamento;
-        funcionario = super.getNomeFuncionario();
-        this.setNomeFuncionario(funcionario);
     }
 
-    public void novoOrcamento() {
+    public void novoOrcamento() throws IllegalArgumentException {
         Scanner scan = new Scanner(System.in);
         System.out.println("Digite o nome do cliente: ");
         this.cliente = scan.nextLine();
@@ -44,7 +45,11 @@ public class Servico extends Funcionario {
         System.out.println("Digite o ano do carro: ");
         this.ano = Integer.parseInt(scan.nextLine());
         System.out.println("Digite o valor do serviço: ");
-        this.orcamento = Double.parseDouble(scan.nextLine());
+        double valor = Double.parseDouble(scan.nextLine());
+        if(valor < 0) {
+            throw new IllegalArgumentException("o  valor  não pode ser menor que zero!");
+        }
+        this.orcamento = valor;
     }
 
     public void imprimir() {
@@ -54,12 +59,21 @@ public class Servico extends Funcionario {
     @Override
     public String toString() {
         return "Cliente: " + this.getCliente() +
-                "\nTipo de serviço: " + getServico() +
-                "\nModelo: " + getModelo() +
-                "\nAno: " + getAno() +
-                "\nPrevisão de entrega: " + getDiaEntrega() + "/" + getMesEntrega() +
-                "\nPreço: " + getOrcamento() +
-                "\nFuncionario Responsável: " + getNomeFuncionario();
+                "\nTipo de serviço: " + this.getServico() +
+                "\nFuncionario Responsavel: " + this.getFuncionarioResponsavel() +
+                "\nModelo: " + this.getModelo() +
+                "\nAno: " + this.getAno() +
+                "\nPrevisão de entrega: " + this.getPrevisaoDiaEntrega()+ "/" + this.getPrevisaoMesEntrega() +
+                "\nPreço: " + this.getOrcamento() +
+                "\nServiço cancelado: " + this.servicoCancelado;
+    }
+
+    public void isServicoCancelado(boolean servicoCanc) {
+        if(servicoCanc == true) {
+            this.servicoCancelado = true;
+        } else {
+            this.servicoCancelado = false;
+        }
     }
 
     public int getDiaEntrega() {
@@ -105,6 +119,10 @@ public class Servico extends Funcionario {
     public void setCliente(String cliente) {
         this.cliente = cliente;
     }
+
+    public void setFuncionarioResponsavel(Funcionario funcionarioResponsavel) {this.funcionarioResponsavel = funcionarioResponsavel;}
+
+    public Funcionario getFuncionarioResponsavel() { return funcionarioResponsavel; }
 
     public double getOrcamento() {
         return orcamento;
