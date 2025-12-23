@@ -1,6 +1,8 @@
 package br.edu.infnet.victorapi.model.domain;
 
-public abstract class Funcionario {
+import br.edu.infnet.victorapi.model.domain.interfaces.Exibir;
+
+public abstract class Funcionario implements Exibir {
 
     private String nomeFuncionario;
     private int idadeFuncionario;
@@ -8,8 +10,6 @@ public abstract class Funcionario {
     private boolean ativo;
     protected String turno;
     private String verificarAtivo;
-    public Funcionario() {
-    }
 
     public void isAtivo(boolean ativo) {
         this.ativo = ativo;
@@ -18,12 +18,6 @@ public abstract class Funcionario {
         } else {
             verificarAtivo = "Inativo";
         }
-    }
-
-    public Funcionario(String nomeFuncionario, int idadeFuncionario) {
-        this.nomeFuncionario = nomeFuncionario;
-        this.idadeFuncionario = idadeFuncionario;
-        System.out.println("Funcionario " + nomeFuncionario + " cadastrado com sucesso");
     }
 
     @Override
@@ -43,14 +37,14 @@ public abstract class Funcionario {
     }
 
     public String getNomeFuncionario() {
-        return nomeFuncionario;
+        return this.nomeFuncionario;
     }
 
     public double getFaturamento() {
-        return faturamento;
+        return this.faturamento;
     }
 
     public int getIdadeFuncionario() {
-        return idadeFuncionario;
+        return this.idadeFuncionario;
     }
 }

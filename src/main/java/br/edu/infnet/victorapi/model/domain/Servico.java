@@ -14,9 +14,7 @@ public class Servico extends Funcionario {
     private int ano;
     private double orcamento;
 
-
-    public Servico() {
-    }
+    public Servico() {}
 
     public Servico(String cliente, int servico, int previsaoDiaEntrega, int previsaoMesEntrega, String modelo, int ano, double orcamento, String funcionario) {
         super();

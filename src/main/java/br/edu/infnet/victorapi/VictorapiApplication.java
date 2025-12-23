@@ -6,6 +6,10 @@ import br.edu.infnet.victorapi.model.domain.FuncionarioFixo;
 import br.edu.infnet.victorapi.model.domain.Servico;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +17,7 @@ import java.util.Scanner;
 @SpringBootApplication
 public class VictorapiApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         SpringApplication.run(VictorapiApplication.class, args);
         Scanner in = new Scanner(System.in);
         boolean continuar = true;
@@ -126,11 +130,14 @@ public class VictorapiApplication {
                         Funcionario novoFuncionarioFixo = new FuncionarioFixo(nome, idade, salario, turno);
                         novoFuncionarioFixo.isAtivo(true);
                         funcionarios.add(novoFuncionarioFixo);
+                        novoFuncionarioFixo.imprimir();
                         break;
                     } else {
                         Funcionario novoFuncionarioComissao = new FuncionarioComissao(nome, idade);
                         funcionarios.add(novoFuncionarioComissao);
+                        novoFuncionarioComissao.imprimir();
                     }
+                    BufferedWriter bw = new BufferedWriter(new FileWriter("funcionarios.txt"));
                     break;
                 case 3:
                     boolean selecionou = false;
