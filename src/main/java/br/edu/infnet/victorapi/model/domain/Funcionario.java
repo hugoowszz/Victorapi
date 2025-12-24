@@ -11,6 +11,8 @@ public abstract class Funcionario implements Exibir {
     protected String turno;
     private String verificarAtivo;
 
+    public abstract double calcularBonus();
+
     public Funcionario() {
         this.ativo = true;
         this.verificarAtivo = "Ativo";
@@ -40,7 +42,7 @@ public abstract class Funcionario implements Exibir {
 
     @Override
     public String toString() {
-        return "Funcionario: " + this.nomeFuncionario + "\nIdade: " + this.idadeFuncionario + " anos\nSituação: " + verificarAtivo + "\nTurno: " + this.turno;
+        return "Funcionario: " + this.nomeFuncionario + "\nIdade: " + this.idadeFuncionario + " anos\nSituação: " + verificarAtivo + "\nTurno: " + this.turno + "\nFaturamento: " + this.faturamento;
     }
     public void setNomeFuncionario(String nomeFuncionario) {
         this.nomeFuncionario = nomeFuncionario;

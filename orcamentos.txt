@@ -5,4 +5,12 @@ Ano: 2010
 Previsão de entrega: 29/1
 Preço: 1200.0
 Funcionario Responsável: null
+-----------------------------Cliente: Carlos
+Tipo de serviço: 1
+Funcionario Responsavel: null
+Modelo: Tucson
+Ano: 2010
+Previsão de entrega: 29/12
+Preço: 2000.0
+Serviço cancelado: false
 -----------------------------

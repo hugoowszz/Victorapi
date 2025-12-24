@@ -25,16 +25,26 @@ public class VictorapiApplication {
         List<Funcionario> funcionarios = new ArrayList<>();
         List<Servico> orcamentos = new ArrayList<>();
         List<Servico> servicosFinalizados = new ArrayList<>();
+        Funcionario[] funcionariosDestaque = new Funcionario[3];
 
-        List<String> funcionariosDesignados = new ArrayList<>();
-        //Funcionario funcionario1 = new Funcionario("Victor", 19);
-        //funcionario1.isAtivo(true);
-        //funcionarios.add(funcionario1);
-
-        Funcionario funcFixo1 = new FuncionarioFixo("Victor", 19, 2000, "8h/ dia");
         Funcionario funcComissao1 = new FuncionarioComissao("Carlos", 45);
+        Funcionario funcComissao2 = new FuncionarioComissao("Victor", 19);
+        Funcionario funcComissao3 = new FuncionarioComissao("Maciel", 43);
+        Funcionario funcComissao4 = new FuncionarioComissao("Denilson", 30);
+
+
         funcionarios.add(funcComissao1);
-        funcionarios.add(funcFixo1);
+        funcComissao1.setFaturamento(5000.0);
+
+        funcionarios.add(funcComissao2);
+        funcComissao2.setFaturamento(3000.0);
+
+        funcionarios.add(funcComissao3);
+        funcComissao3.setFaturamento(4000.0);
+
+        funcionarios.add(funcComissao4);
+        funcComissao4.setFaturamento(7000.0);
+
 
         Servico  servico1 = new Servico("Elberth", 3, 15, 1, "Corolla", 2025, 7000);
         orcamentos.add(servico1);
@@ -45,8 +55,8 @@ public class VictorapiApplication {
             int opcao;
             do {
                 System.out.println("----------\n1 - Fazer orçamento\n2 - Cadastrar funcionario\n3 - Iniciar serviço\n4 - Lista de orçamentos" +
-                        "\n5 - Lista de funcionarios\n6 - Remover serviço\n7 - Finalizar serviço\n8 - Lista de serviços entregues" +
-                        "\n9 - Faturamento de funcionarios\n10 - Ler arquivo de funcionarios\n11 - Ler arquivos de orçamentos\n12 - ler arquivo de serviços finalizados\n13 - Consultar faturamento dos funcionarios\n0 - Sair\n----------");
+                        "\n5 - Lista de funcionarios\n6 - Remover serviço\n7 - Finalizar serviço\n8 - Lista dos serviços entregues" +
+                        "\n9 - Funcionarios destaque\n10 - Ler arquivo de funcionarios\n11 - Ler arquivos de orçamentos\n12 - ler arquivo de serviços finalizados\n13 - Consultar faturamento dos funcionarios\n0 - Sair\n----------");
                 System.out.print("Escolha uma das opções: ");
                 if(!in.hasNextInt()) {
                     System.err.println("Erro, digite um numero para selecionar!");
@@ -400,12 +410,13 @@ public class VictorapiApplication {
                     }
                     break;
                 case 9:
-                    System.out.println("Digite o nome do funcionario que deseja consultar os ganhos");
-                    String nomeFunGanho = in.nextLine();
-                    for (int f = 0; f < funcionarios.size(); f++) {
-                        if (funcionarios.get(f).getNomeFuncionario().equals(nomeFunGanho) || funcionarios.get(f).getNomeFuncionario().toLowerCase().equals(nomeFunGanho.toLowerCase())) {
-                            System.out.println("Faturamento: " + funcionarios.get(f).getFaturamento());
-                        }
+                    funcionarios.sort((f1, f2) -> Double.compare(f2.getFaturamento(), f1.getFaturamento()));
+
+                    int min = Math.min(funcionarios.size(), 3);
+
+                    for(int c = 0; c < min; c++) {
+                        funcionariosDestaque[c] = funcionarios.get(c);
+                        System.out.println(funcionariosDestaque[c].toString() + "\n");
                     }
                     break;
                 case 10:

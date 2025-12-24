@@ -30,7 +30,7 @@ public class Servico {
         this.orcamento = orcamento;
     }
 
-    public void novoOrcamento() throws IllegalArgumentException {
+    public final void novoOrcamento() throws IllegalArgumentException {
         Scanner scan = new Scanner(System.in);
         System.out.println("Digite o nome do cliente: ");
         this.cliente = scan.nextLine();

@@ -11,6 +11,11 @@ public final class FuncionarioFixo extends Funcionario{
     }
 
     @Override
+    public double calcularBonus() {
+        return this.salario * 0.25;
+    }
+
+    @Override
     public void imprimir() {
         System.out.println("Nome: " + super.getNomeFuncionario() + "\nIdade: " + super.getIdadeFuncionario() + "\nTurno: " + this.turno + "\nSalario: " + this.salario);
     }
